@@ -9,7 +9,7 @@ import java.util.UUID;
 @RestController
 public class ApiController {
 
-    @GetMapping("/")
+    @GetMapping("/sessionId")
     String uid(HttpSession session) {
         UUID uid = (UUID) session.getAttribute("uid");
         if (uid == null) {

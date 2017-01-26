@@ -19,6 +19,7 @@ Requirements
 ------------
 
 1. Java 8+
+2. Local mongo instance running, configurable by changing the application properties file. 
 
 Build Image
 -------------

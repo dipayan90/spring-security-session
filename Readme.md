@@ -4,12 +4,13 @@ Spring Security Session Demo
 Description
 ------------
 
-A simple spring security and session application.  
+A simple spring security and session application that uses mongo as the authorization store.  
 
 It supports the following :
 
  - An endpoint /sessionId which generates a session ID ( A random UUID ). If your session is established, you keep getting the 
    same sessionId. Session times out after 1 min of inactivity. 
+ - First create a user hitting the /register endpoint Example: http://localhost:8080/register?username=dipayan&pwd=dipayan
  - Going to / will take you to a welcome screen from where you could use spring security to login
    and access a resource.
  - An option to logout once you are done. 

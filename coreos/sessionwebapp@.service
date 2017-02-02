@@ -1,0 +1,17 @@
+[Unit]
+Description=sessionwebapp
+Requires=docker.service
+After=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+KillMode=none
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill sessionwebapp
+ExecStartPre=-/usr/bin/docker rm sessionwebapp
+ExecStartPre=/usr/bin/docker pull dipayan90/sessionwebapp
+ExecStart=/usr/bin/docker run --rm --name sessionwebapp --label maintainer="dipayan90@gmail.com" -p 8080:8080 -e ENVNAME=${ENVNAME} -e SERVICE_IGNORE=true -e HOST_IP=${COREOS_PUBLIC_IPV4} dipayan90/sessionwebapp
+ExecStop=/usr/bin/docker stop sessionwebapp
+
+[X-Fleet]
+X-Conflicts=contrived-service-*.service

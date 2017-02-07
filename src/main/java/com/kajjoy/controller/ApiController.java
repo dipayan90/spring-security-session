@@ -1,9 +1,13 @@
 package com.kajjoy.controller;
 
+import com.kajjoy.model.AuthenticatedUser;
 import com.kajjoy.service.KajjoyUserRegistrationService;
+import com.mongodb.util.JSON;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
@@ -31,6 +35,18 @@ public class ApiController {
         }else{
             return "User with the username already registered";
         }
+    }
+
+    @GetMapping("/userDetail")
+    public AuthenticatedUser getCurrentUser(HttpServletRequest request){
+        AuthenticatedUser usr = new AuthenticatedUser();
+        usr.setUsername(request.getRemoteUser());
+        return usr;
+    }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request) throws ServletException {
+        request.logout();
     }
 
 }

@@ -3,11 +3,9 @@ package com.kajjoy.model;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 
 @Data
 @Document
@@ -16,14 +14,19 @@ public class AuthenticatedUser implements Serializable{
 
     public AuthenticatedUser(){}
 
-    public AuthenticatedUser(String user,String password){
-        this.username = user;
-        this.password = password;
+    public AuthenticatedUser(String usr,String pwd){
+        this.username = usr;
+        this.password = pwd;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "id",unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private BigInteger id;
+
+    @Column
     private String username;
+
+    @Column
     private String password;
 }

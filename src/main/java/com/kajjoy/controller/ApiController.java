@@ -24,8 +24,13 @@ public class ApiController {
     }
 
     @RequestMapping(value = "/register",method = RequestMethod.GET)
-    public void register(@RequestParam String username,@RequestParam String pwd){
-        userRegistrationService.register(username,pwd);
+    public String register(@RequestParam String username,@RequestParam String pwd){
+        boolean status = userRegistrationService.register(username,pwd);
+        if(status){
+            return "Successfully Registered Thanks";
+        }else{
+            return "User with the username already registered";
+        }
     }
 
 }

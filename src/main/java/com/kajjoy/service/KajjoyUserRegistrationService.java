@@ -12,8 +12,12 @@ public class KajjoyUserRegistrationService {
     @Resource
     private UserRepository userRepository;
 
-    public void register(String user,String pwd){
-        userRepository.save(new AuthenticatedUser(user,pwd));
+    public boolean register(final String username,final String pwd){
+        if(userRepository.findByUsername(username) == null){
+            userRepository.save(new AuthenticatedUser(username,pwd));
+            return true;
+        }
+        return false;
     }
 
 }
